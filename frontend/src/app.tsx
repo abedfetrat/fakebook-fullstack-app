@@ -12,10 +12,15 @@ interface UsersListResponse {
   users: User[]
 }
 
+interface Author {
+  uid: string,
+  firstName: string,
+  lastName: string
+}
 
 interface Post {
   id: string,
-  author: string,
+  author: Author,
   content: string,
   likes: number,
   dislikes: number,
@@ -69,6 +74,7 @@ function App() {
           posts.map(post => (
             <div className="card bg-base-100 w-96 shadow-xl">
               <div className="card-body">
+                <p>{post.author.uid}</p>
                 <p>{post.content}</p>
               </div>
             </div>
