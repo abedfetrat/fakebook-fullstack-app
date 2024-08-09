@@ -1,0 +1,28 @@
+{
+  "posts": [
+    {
+      "id": "post_27d69b8f-68a4-4d1f-9c1a-0d4a92d6e782",
+      "author": "captainobvious",
+      "content": "Why did I spend 20 minutes looking for my phone while using the flashlight on my phone? If anyone needs me, I'll be over here questioning my life choices.",
+      "likes": 35,
+      "dislikes": 3,
+      "postedAt": "2024-08-09T12:00:00Z"
+    },
+    {
+      "id": "post_b2e8e399-9b64-45d7-a919-c75f7cba08c3",
+      "author": "lifemysteries",
+      "content": "I just yelled at my dog to stop barking... only to realize it was the neighbor's dog. Sorry, buddy. You didn’t deserve that.",
+      "likes": 28,
+      "dislikes": 2,
+      "postedAt": "2024-08-09T14:30:00Z"
+    },
+    {
+      "id": "post_4f732a39-7c10-4bc6-8e53-08489ec80c45",
+      "author": "momlife",
+      "content": "Asked my kid what they wanted for dinner and they said 'breakfast.' So I guess we're having pancakes for dinner. Again.",
+      "likes": 45,
+      "dislikes": 1,
+      "postedAt": "2024-08-09T15:45:00Z"
+    }
+  ]
+}
