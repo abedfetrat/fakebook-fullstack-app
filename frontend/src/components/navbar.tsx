@@ -1,4 +1,4 @@
-import {User} from "./types.ts";
+import {User} from "../types.ts";
 
 function Navbar({user}: { user: User | null }) {
   const userInitials = () => {

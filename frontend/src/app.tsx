@@ -2,8 +2,8 @@ import './App.css'
 import {useEffect, useState} from "react";
 import {getPosts, getUsers} from "./api.ts";
 import {Post, User} from "./types.ts";
-import Navbar from "./navbar.tsx";
-import Posts from "./posts.tsx";
+import Navbar from "./components/navbar.tsx";
+import Posts from "./components/posts.tsx";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);

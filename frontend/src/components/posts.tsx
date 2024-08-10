@@ -1,4 +1,4 @@
-import {Post} from "./types.ts";
+import {Post} from "../types.ts";
 
 function Posts({posts}: { posts: Post[] | null }) {
   return (
