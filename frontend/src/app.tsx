@@ -1,6 +1,7 @@
 import './App.css'
 import {useEffect, useState} from "react";
-import {getPosts, getUsers, Post, User} from "./api.ts";
+import {getPosts, getUsers} from "./api.ts";
+import {Post, User} from "./types.ts";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
