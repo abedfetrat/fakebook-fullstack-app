@@ -29,35 +29,27 @@ function App() {
       <header>
         <Navbar user={user}/>
       </header>
-      {
-        user != null
-          ?
-          <div className="card bg-base-100 w-96 shadow-xl">
-            <div className="card-body">
-              <h2 className="card-title">Logged in user</h2>
-              <p>Username: {user.uid}</p>
-              <p>First Name: {user.firstName}</p>
-              <p>Last Name: {user.lastName}</p>
-              <p>Email: {user.email}</p>
+      <main className="container max-w-screen-lg mx-auto py-8 px-4 md:py-12">
+        <h1 className="text-2xl">Recent posts</h1>
+        {
+          posts != null
+            ?
+            <div className="flex flex-col flex-wrap gap-4 mt-6">
+              {
+                posts.map(post => (
+                  <div className="card bg-base-100 w-100 shadow-lg">
+                    <div className="card-body">
+                      <p>{post.author.uid}</p>
+                      <p>{post.content}</p>
+                    </div>
+                  </div>
+                ))
+              }
             </div>
-          </div>
-          :
-          "Loading user..."
-      }
-      {
-        posts != null
-          ?
-          posts.map(post => (
-            <div className="card bg-base-100 w-96 shadow-xl">
-              <div className="card-body">
-                <p>{post.author.uid}</p>
-                <p>{post.content}</p>
-              </div>
-            </div>
-          ))
-          :
-          "Loading user..."
-      }
+            :
+            "Loading user..."
+        }
+      </main>
     </>
   )
 }
