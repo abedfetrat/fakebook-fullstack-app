@@ -2,6 +2,7 @@ import './App.css'
 import {useEffect, useState} from "react";
 import {getPosts, getUsers} from "./api.ts";
 import {Post, User} from "./types.ts";
+import Navbar from "./navbar.tsx";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -25,6 +26,9 @@ function App() {
 
   return (
     <>
+      <header>
+        <Navbar user={user}/>
+      </header>
       {
         user != null
           ?
