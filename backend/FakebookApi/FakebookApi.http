@@ -1,0 +1,6 @@
+@FakebookApi_HostAddress = http://localhost:5190
+
+GET {{FakebookApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
