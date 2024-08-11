@@ -8,7 +8,7 @@ function Posts({posts}: { posts: PostType[] | null }) {
       {
         posts != null
           ?
-          <div className="flex flex-col flex-wrap gap-4 mt-8">
+          <div className="flex flex-col flex-wrap gap-6 mt-8">
             {
               posts.map(post => (
                 <Post key={post.id} post={post}/>
