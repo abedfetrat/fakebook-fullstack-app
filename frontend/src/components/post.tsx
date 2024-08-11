@@ -1,5 +1,5 @@
 import {Post as PostType} from "../types.ts";
-import {getDaysAgo} from "../utils.ts";
+import {getDaysAgo, getInitials} from "../utils.ts";
 
 function Post({post}: { post: PostType }) {
   return (
@@ -8,7 +8,7 @@ function Post({post}: { post: PostType }) {
         <div className="flex gap-4 mb-4">
           <div className="avatar placeholder">
             <div className="w-12 rounded-full bg-base-300 text-base-content">
-              <span>{post.author.firstName.toUpperCase()[0] + post.author.lastName.toUpperCase()[0]}</span>
+              <span>{getInitials(post.author.firstName, post.author.lastName)}</span>
             </div>
           </div>
           <div>

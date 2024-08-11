@@ -10,3 +10,5 @@ export const getDaysAgo = (timestamp: string) => {
     return `${daysAgo} days ago`;
   }
 };
+
+export const getInitials = (first: string, last: string) => first[0].toUpperCase() + last[0].toUpperCase();
