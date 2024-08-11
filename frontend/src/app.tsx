@@ -1,22 +1,19 @@
 import './App.css'
 import {useEffect, useState} from "react";
-import {getPosts, getUsers} from "./api.ts";
+import {getPosts} from "./api.ts";
 import {Post, User} from "./types.ts";
 import Navbar from "./components/navbar.tsx";
 import Posts from "./components/posts.tsx";
 import NewPost from "./components/new-post.tsx";
 
 function App() {
-  const [user, setUser] = useState<User | null>(null);
+  const user: User = {
+    uid: "johndoe",
+    firstName: "John",
+    lastName: "Doe",
+    email: "johndoe@mail.com"
+  };
   const [posts, setPosts] = useState<Post[] | null>(null);
-
-  useEffect(() => {
-    getUsers().then(users => {
-      if (users && users.length > 0) {
-        setUser(users[0]);
-      }
-    })
-  }, []);
 
   useEffect(() => {
     handleGetPosts();
@@ -36,10 +33,10 @@ function App() {
         <Navbar user={user}/>
       </header>
       <main className="container max-w-screen-lg mx-auto py-8 px-4 md:py-12">
-        {user && <NewPost user={user} onGetPosts={handleGetPosts}/>}
+        <NewPost user={user} onGetPosts={handleGetPosts}/>
         <Posts
           posts={posts}
-          user={user!}
+          user={user}
           onGetPosts={handleGetPosts}/>
       </main>
     </>

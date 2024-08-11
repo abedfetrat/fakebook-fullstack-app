@@ -1,14 +1,4 @@
-import {PostsListResponse, User, UsersListResponse} from "./types.ts";
-
-export async function getUsers() {
-  const response = await fetch("data/users.json");
-  if (!response.ok) {
-    console.error("Could not fetch users");
-    return;
-  }
-  const usersListResponse = (await response.json()) as UsersListResponse;
-  return usersListResponse.users;
-}
+import {PostsListResponse, User} from "./types.ts";
 
 export async function getPosts() {
   const response = await fetch("/api/posts");
