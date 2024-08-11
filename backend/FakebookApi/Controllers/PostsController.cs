@@ -43,7 +43,13 @@ public class PostsController : ControllerBase
     }
 
     [HttpGet]
-    public PostsListResponse GetPosts() => new(Posts);
+    public PostsListResponse GetPosts()
+    {
+        var orderedPosts = Posts
+            .OrderByDescending(post => post.PostedAt)
+            .ToList();
+        return new PostsListResponse(orderedPosts);
+    }
 
     [HttpGet("{id}")]
     public ActionResult<Post> GetPostById(string id)
@@ -53,7 +59,7 @@ public class PostsController : ControllerBase
             ? foundPost
             : NotFound($"Post with id '{id}' not found.");
     }
-    
+
     [HttpPost]
     public ActionResult CreatePost(CreatePostRequest createPostRequest)
     {
