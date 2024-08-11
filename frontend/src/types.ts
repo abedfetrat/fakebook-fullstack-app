@@ -21,7 +21,7 @@ export interface Post {
   content: string,
   likes: number,
   dislikes: number,
-  postedAt: Date,
+  postedAt: string,
 }
 
 export interface PostsListResponse {

@@ -1,6 +1,7 @@
-import {Post} from "../types.ts";
+import {Post as PostType} from "../types.ts";
+import Post from "./post.tsx";
 
-function Posts({posts}: { posts: Post[] | null }) {
+function Posts({posts}: { posts: PostType[] | null }) {
   return (
     <section>
       <h1 className="text-2xl">Recent posts</h1>
@@ -10,12 +11,7 @@ function Posts({posts}: { posts: Post[] | null }) {
           <div className="flex flex-col flex-wrap gap-4 mt-6">
             {
               posts.map(post => (
-                <div className="card bg-base-100 w-100 shadow-lg">
-                  <div className="card-body">
-                    <p>{post.author.uid}</p>
-                    <p>{post.content}</p>
-                  </div>
-                </div>
+                <Post key={post.id} post={post}/>
               ))
             }
           </div>
