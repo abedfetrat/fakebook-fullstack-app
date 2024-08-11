@@ -43,5 +43,5 @@ public class PostsController : ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<Post> GetPosts() => Posts;
+    public PostsListResponse GetPosts() => new(Posts);
 }
