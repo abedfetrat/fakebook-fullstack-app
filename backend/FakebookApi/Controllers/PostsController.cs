@@ -44,4 +44,13 @@ public class PostsController : ControllerBase
 
     [HttpGet]
     public PostsListResponse GetPosts() => new(Posts);
+
+    [HttpGet("{id}")]
+    public ActionResult<Post> GetPostById(string id)
+    {
+        var foundPost = Posts.FirstOrDefault(p => p.Id == id);
+        return foundPost is not null
+            ? foundPost
+            : NotFound($"Post with id '{id}' not found.");
+    }
 }
