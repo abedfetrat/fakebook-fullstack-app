@@ -81,4 +81,16 @@ public class PostsController : ControllerBase
 
         return CreatedAtAction(nameof(GetPostById), new { id = newPost.Id }, newPost);
     }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeletePost(string id)
+    {
+        var foundPost = Posts.FirstOrDefault(p => p.Id == id);
+        if (foundPost is not null)
+        {
+            Posts.Remove(foundPost);
+        }
+
+        return NoContent();
+    }
 }
