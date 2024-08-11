@@ -53,4 +53,26 @@ public class PostsController : ControllerBase
             ? foundPost
             : NotFound($"Post with id '{id}' not found.");
     }
+    
+    [HttpPut]
+    public ActionResult CreatePost(CreatePostRequest createPostRequest)
+    {
+        // TOOD: validate request
+        var author = new Author(
+            createPostRequest.User.Uid,
+            createPostRequest.User.FirstName,
+            createPostRequest.User.LastName);
+
+        var newPost = new Post(
+            Id: "post_" + Guid.NewGuid().ToString().Replace("-", ""),
+            Author: author,
+            Content: createPostRequest.Content,
+            Likes: 0,
+            Dislikes: 0,
+            PostedAt: DateTime.Now);
+
+        Posts.Add(newPost);
+
+        return CreatedAtAction(nameof(GetPostById), new { id = newPost.Id }, newPost);
+    }
 }
