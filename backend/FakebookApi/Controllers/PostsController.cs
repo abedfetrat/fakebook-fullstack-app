@@ -41,4 +41,7 @@ public class PostsController : ControllerBase
     {
         _logger = logger;
     }
+
+    [HttpGet]
+    public IEnumerable<Post> GetPosts() => Posts;
 }
