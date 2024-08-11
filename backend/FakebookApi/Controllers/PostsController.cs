@@ -54,7 +54,7 @@ public class PostsController : ControllerBase
             : NotFound($"Post with id '{id}' not found.");
     }
     
-    [HttpPut]
+    [HttpPost]
     public ActionResult CreatePost(CreatePostRequest createPostRequest)
     {
         // TOOD: validate request
