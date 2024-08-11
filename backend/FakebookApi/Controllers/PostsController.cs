@@ -11,30 +11,33 @@ public class PostsController : ControllerBase
 
     private static readonly List<Post> Posts =
     [
-        new Post(
-            Id: "post_" + Guid.NewGuid().ToString().Replace("-", ""),
-            Author: new Author("abedfetrat", "Abed", "Fetrat"),
-            Content: "Hello World from Abed Fetrat!",
-            Likes: 10,
-            Dislikes: 0,
-            PostedAt: DateTime.Now
-        ),
-        new Post(
-            Id: "post_" + Guid.NewGuid().ToString().Replace("-", ""),
-            Author: new Author("johndoe", "John", "Doe"),
-            Content: "Hello World from John Doe!",
-            Likes: 38,
-            Dislikes: 2,
-            PostedAt: DateTime.Now
-        ),
-        new Post(
-            Id: "post_" + Guid.NewGuid().ToString().Replace("-", ""),
-            Author: new Author("markzucker", "Mark", "Zuckerberg"),
-            Content: "Hello World from Mark Zuckerberg!",
-            Likes: 1020,
-            Dislikes: 53,
-            PostedAt: DateTime.Now
-        )
+        new Post()
+        {
+            Id = "post_" + Guid.NewGuid().ToString().Replace("-", ""),
+            Author = new Author("markzucker", "Mark", "Zucker"),
+            Content = "Hello World from Mark Zucker!",
+            Likes = 0,
+            Dislikes = 1200,
+            PostedAt = DateTime.Now
+        },
+        new Post()
+        {
+            Id = "post_" + Guid.NewGuid().ToString().Replace("-", ""),
+            Author = new Author("muskelon", "Elon", "Musketeer"),
+            Content = "Hello World from Elon Musketeer!",
+            Likes = 899,
+            Dislikes = 0,
+            PostedAt = DateTime.Now
+        },
+        new Post()
+        {
+            Id = "post_" + Guid.NewGuid().ToString().Replace("-", ""),
+            Author = new Author("mynameisjeff", "Jeff", "Bezoar"),
+            Content = "Hello World from Jeff Bezoar!",
+            Likes = 523,
+            Dislikes = 43,
+            PostedAt = DateTime.Now
+        },
     ];
 
     public PostsController(ILogger<PostsController> logger)
@@ -69,17 +72,33 @@ public class PostsController : ControllerBase
             createPostRequest.User.FirstName,
             createPostRequest.User.LastName);
 
-        var newPost = new Post(
-            Id: "post_" + Guid.NewGuid().ToString().Replace("-", ""),
-            Author: author,
-            Content: createPostRequest.Content,
-            Likes: 0,
-            Dislikes: 0,
-            PostedAt: DateTime.Now);
+        var newPost = new Post()
+        {
+            Id = "post_" + Guid.NewGuid().ToString().Replace("-", ""),
+            Author = author,
+            Content = createPostRequest.Content,
+            Likes = 0,
+            Dislikes = 0,
+            PostedAt = DateTime.Now
+        };
 
         Posts.Add(newPost);
 
         return CreatedAtAction(nameof(GetPostById), new { id = newPost.Id }, newPost);
+    }
+
+    [HttpPut("{id}")]
+    public ActionResult<Post> UpdatePost(string id, UpdatePostRequest updatePostRequest)
+    {
+        var foundPost = Posts.FirstOrDefault(p => p.Id == id);
+        if (foundPost is null)
+        {
+            return NotFound($"Post with id '{id}' not found.");
+        }
+
+        foundPost.Content = updatePostRequest.Content;
+
+        return foundPost;
     }
 
     [HttpDelete("{id}")]
