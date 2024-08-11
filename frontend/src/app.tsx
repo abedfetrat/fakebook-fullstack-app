@@ -37,7 +37,10 @@ function App() {
       </header>
       <main className="container max-w-screen-lg mx-auto py-8 px-4 md:py-12">
         {user && <NewPost user={user} onGetPosts={handleGetPosts}/>}
-        <Posts posts={posts}/>
+        <Posts
+          posts={posts}
+          user={user!}
+          onGetPosts={handleGetPosts}/>
       </main>
     </>
   )

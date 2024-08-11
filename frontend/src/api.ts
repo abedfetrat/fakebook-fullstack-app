@@ -38,3 +38,14 @@ export async function createPost(content: string, user: User) {
   }
   return true;
 }
+
+export async function deletePost(id: string) {
+  const response = await fetch(`/api/posts/${id}`, {
+    method: "DELETE"
+  });
+  if (!response.ok) {
+    console.error(response.status, response.statusText);
+    return false;
+  }
+  return true;
+}

@@ -1,17 +1,41 @@
-import {Post as PostType} from "../types.ts";
+import {Post as PostType, User} from "../types.ts";
 import {getDaysAgo, getInitials} from "../utils.ts";
 import Avatar from "./avatar.tsx";
+import {deletePost} from "../api.ts";
 
-function Post({post}: { post: PostType }) {
+type PostProps = {
+  post: PostType,
+  user: User,
+  onGetPosts: () => void,
+}
+
+function Post({post, user, onGetPosts}: PostProps) {
+  const handleDelete = async () => {
+    const deleted = await deletePost(post.id);
+    if (deleted) {
+      onGetPosts();
+    }
+  };
+
   return (
     <div className="card bg-base-100 w-100 shadow-lg">
       <div className="card-body">
-        <div className="flex gap-4 mb-4">
+        <div className="flex gap-4 mb-4 items-start">
           <Avatar initials={getInitials(post.author.firstName, post.author.lastName)}/>
           <div>
             <p className="font-medium">{post.author.firstName} {post.author.lastName}</p>
             <p className="text-sm text-neutral-500">{getDaysAgo(post.postedAt)}</p>
           </div>
+          {(post.author.uid == user.uid) &&
+            <div className="dropdown ml-auto">
+              <div tabIndex={0} role="button" className="btn btn-ghost m-1"><Kebab/></div>
+              <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                <li>
+                  <button>Edit</button>
+                  <button className="text-error" onClick={handleDelete}>Delete</button>
+                </li>
+              </ul>
+            </div>}
         </div>
         <p className="text-neutral-600">{post.content}</p>
         <div className="card-actions mt-4 gap-8 text-neutral-500">
@@ -27,6 +51,16 @@ function Post({post}: { post: PostType }) {
         </div>
       </div>
     </div>
+  );
+}
+
+function Kebab() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+         className="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+      <path
+        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+    </svg>
   );
 }
 
