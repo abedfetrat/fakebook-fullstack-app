@@ -11,7 +11,7 @@ export async function getUsers() {
 }
 
 export async function getPosts() {
-  const response = await fetch("data/posts.json");
+  const response = await fetch("/api/posts");
   if (!response.ok) {
     console.error("Could not fetch posts");
     return;
