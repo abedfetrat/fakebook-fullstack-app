@@ -4,6 +4,7 @@ import {getPosts, getUsers} from "./api.ts";
 import {Post, User} from "./types.ts";
 import Navbar from "./components/navbar.tsx";
 import Posts from "./components/posts.tsx";
+import NewPost from "./components/new-post.tsx";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -31,6 +32,7 @@ function App() {
         <Navbar user={user}/>
       </header>
       <main className="container max-w-screen-lg mx-auto py-8 px-4 md:py-12">
+        {user && <NewPost user={user}/>}
         <Posts posts={posts}/>
       </main>
     </>
