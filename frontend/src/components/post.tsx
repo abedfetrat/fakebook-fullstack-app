@@ -10,19 +10,19 @@ function Post({post}: { post: PostType }) {
           <Avatar initials={getInitials(post.author.firstName, post.author.lastName)}/>
           <div>
             <p className="font-medium">{post.author.firstName} {post.author.lastName}</p>
-            <p className="text-sm">{getDaysAgo(post.postedAt)}</p>
+            <p className="text-sm text-neutral-500">{getDaysAgo(post.postedAt)}</p>
           </div>
         </div>
-        <p>{post.content}</p>
-        <div className="card-actions mt-4 gap-8 text-neutral-600">
+        <p className="text-neutral-600">{post.content}</p>
+        <div className="card-actions mt-4 gap-8 text-neutral-500">
           <div className="flex gap-2">
-            <ThumbsUp/> {post.likes}
+            <ThumbsUp/> <span className="text-neutral-700 font-medium">{post.likes}</span>
           </div>
           <div className="flex gap-2 font-medium">
-            <ThumbsDown/> {post.dislikes}
+            <ThumbsDown/> <span className="text-neutral-700 font-medium">{post.dislikes}</span>
           </div>
           <div className="flex gap-2 font-medium">
-            <Comment/> {0}
+            <Comment/> <span className="text-neutral-700 font-medium">{0}</span>
           </div>
         </div>
       </div>
