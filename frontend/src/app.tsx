@@ -19,12 +19,16 @@ function App() {
   }, []);
 
   useEffect(() => {
+    handleGetPosts();
+  }, []);
+
+  const handleGetPosts = () => {
     getPosts().then(posts => {
       if (posts && posts.length > 0) {
         setPosts(posts);
       }
     })
-  }, []);
+  };
 
   return (
     <>
@@ -32,7 +36,7 @@ function App() {
         <Navbar user={user}/>
       </header>
       <main className="container max-w-screen-lg mx-auto py-8 px-4 md:py-12">
-        {user && <NewPost user={user}/>}
+        {user && <NewPost user={user} onGetPosts={handleGetPosts}/>}
         <Posts posts={posts}/>
       </main>
     </>

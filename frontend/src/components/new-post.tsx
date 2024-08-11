@@ -2,13 +2,22 @@ import {User} from "../types.ts";
 import {getInitials} from "../utils.ts";
 import {useState} from "react";
 import Avatar from "./avatar.tsx";
+import {createPost} from "../api.ts";
 
-function NewPost({user}: { user: User }) {
+type NewPostProps = {
+  user: User,
+  onGetPosts: () => void
+}
+
+function NewPost({user, onGetPosts}: NewPostProps) {
   const [postContent, setPostContent] = useState("");
 
-  const handlePost = () => {
-    // TODO: call api
-    console.log("Posting.... " + postContent);
+  const handlePost = async () => {
+    const created = await createPost(postContent, user);
+    if (created) {
+      onGetPosts();
+    }
+    setPostContent("");
   };
 
   return (
