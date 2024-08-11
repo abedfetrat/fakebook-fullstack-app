@@ -1,6 +1,7 @@
 import {User} from "../types.ts";
 import {getInitials} from "../utils.ts";
 import {useState} from "react";
+import Avatar from "./avatar.tsx";
 
 function NewPost({user}: { user: User }) {
   const [postContent, setPostContent] = useState("");
@@ -14,11 +15,7 @@ function NewPost({user}: { user: User }) {
     <div className="card bg-base-100 w-100 shadow-lg">
       <div className="card-body">
         <div className="flex gap-4 items-start">
-          <div className="avatar placeholder">
-            <div className="w-12 rounded-full bg-base-300 text-base-content">
-              <span>{getInitials(user.firstName, user.lastName)}</span>
-            </div>
-          </div>
+          <Avatar initials={getInitials(user.firstName, user.lastName)}/>
           <div className="w-full">
             <textarea className="w-full" placeholder="Type something nice..."
                       value={postContent}

@@ -1,16 +1,13 @@
 import {Post as PostType} from "../types.ts";
 import {getDaysAgo, getInitials} from "../utils.ts";
+import Avatar from "./avatar.tsx";
 
 function Post({post}: { post: PostType }) {
   return (
     <div className="card bg-base-100 w-100 shadow-lg">
       <div className="card-body">
         <div className="flex gap-4 mb-4">
-          <div className="avatar placeholder">
-            <div className="w-12 rounded-full bg-base-300 text-base-content">
-              <span>{getInitials(post.author.firstName, post.author.lastName)}</span>
-            </div>
-          </div>
+          <Avatar initials={getInitials(post.author.firstName, post.author.lastName)}/>
           <div>
             <p className="font-medium">{post.author.firstName} {post.author.lastName}</p>
             <p className="text-sm">{getDaysAgo(post.postedAt)}</p>
