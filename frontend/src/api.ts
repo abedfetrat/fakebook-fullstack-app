@@ -29,6 +29,21 @@ export async function createPost(content: string, user: User) {
   return true;
 }
 
+export async function updatePost(id: string, newContent: string) {
+  const response = await fetch(`/api/posts/${id}`, {
+    method: "PUT",
+    headers: {
+      "content-type": "application/json"
+    },
+    body: JSON.stringify({content: newContent})
+  });
+  if (!response.ok) {
+    console.error(response.status, response.statusText);
+    return false;
+  }
+  return true;
+}
+
 export async function deletePost(id: string) {
   const response = await fetch(`/api/posts/${id}`, {
     method: "DELETE"
