@@ -2,7 +2,8 @@ export interface User {
   uid: string,
   firstName: string,
   lastName: string,
-  email: string
+  email: string,
+  avatarUrl?: string
 }
 
 export interface UsersListResponse {
@@ -12,7 +13,8 @@ export interface UsersListResponse {
 export interface Author {
   uid: string,
   firstName: string,
-  lastName: string
+  lastName: string,
+  avatarUrl?: string
 }
 
 export interface Post {

@@ -4,5 +4,6 @@ public record User(
     string Uid,
     string FirstName,
     string LastName,
-    string Email
+    string Email,
+    string? AvatarUrl
 );
