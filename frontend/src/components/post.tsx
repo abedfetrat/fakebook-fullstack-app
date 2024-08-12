@@ -42,7 +42,12 @@ function Post({post, user, onGetPosts}: PostProps) {
       <div className="card bg-base-100 w-100 shadow-lg">
         <div className="card-body">
           <div className="flex gap-4 mb-4 items-start">
-            <Avatar initials={getInitials(post.author.firstName, post.author.lastName)}/>
+            {post.author.uid == user.uid
+              ?
+              <Avatar initials={getInitials(post.author.firstName, post.author.lastName)}/>
+              :
+              <img src={`/avatars/${post.author.uid}.jpg`} alt="" className="w-14 rounded-full"/>
+            }
             <div>
               <p className="font-medium">{post.author.firstName} {post.author.lastName}</p>
               <p className="text-sm text-neutral-500">{getDaysAgo(post.postedAt)}</p>
