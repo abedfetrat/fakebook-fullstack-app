@@ -6,10 +6,6 @@ export interface User {
   avatarUrl?: string
 }
 
-export interface UsersListResponse {
-  users: User[]
-}
-
 export interface Author {
   uid: string,
   firstName: string,

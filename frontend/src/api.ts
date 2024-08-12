@@ -3,7 +3,8 @@ import {PostsListResponse, User} from "./types.ts";
 export async function getPosts() {
   const response = await fetch("/api/posts");
   if (!response.ok) {
-    console.error("Could not fetch posts");
+    console.error("Could not fetch posts:");
+    console.error(response.status, response.statusText);
     return;
   }
   const postsListResponse = (await response.json()) as PostsListResponse;
@@ -23,7 +24,8 @@ export async function createPost(content: string, user: User) {
     body: JSON.stringify(createPostRequest)
   });
   if (!response.ok) {
-    console.error(response.status + " " + response.statusText);
+    console.error("Could not create post:");
+    console.error(response.status, response.statusText);
     return false;
   }
   return true;
@@ -38,6 +40,7 @@ export async function updatePost(id: string, newContent: string) {
     body: JSON.stringify({content: newContent})
   });
   if (!response.ok) {
+    console.error(`Could not update post '${id}'`)
     console.error(response.status, response.statusText);
     return false;
   }
@@ -49,6 +52,7 @@ export async function deletePost(id: string) {
     method: "DELETE"
   });
   if (!response.ok) {
+    console.error(`Could not delete post '${id}'`)
     console.error(response.status, response.statusText);
     return false;
   }
