@@ -31,7 +31,10 @@ export async function createPost(content: string, user: User) {
     console.error(response.status, response.statusText);
     return false;
   }
-  return true;
+  // Delaying return inorder to mimic real network call
+  return new Promise<boolean>(resolve => {
+    setTimeout(() => resolve(true), 1000);
+  });
 }
 
 export async function updatePost(id: string, newContent: string) {
