@@ -14,8 +14,9 @@ public class PostsController : ControllerBase
         new Post()
         {
             Id = "post_" + Guid.NewGuid().ToString().Replace("-", ""),
-            Author = new Author("zuckthefuture", "Mark", "Zucker"),
-            Content = "Just had a virtual meeting in the Metaverse. My avatar has better dance moves than I do. #Upgrade",
+            Author = new Author("zuckthefuture", "Mark", "Zucker", AvatarUrl: "zuckthefuture.jpg"),
+            Content =
+                "Just had a virtual meeting in the Metaverse. My avatar has better dance moves than I do. #Upgrade",
             Likes = 0,
             Dislikes = 999999999,
             PostedAt = DateTime.Now.AddDays(-10)
@@ -23,8 +24,9 @@ public class PostsController : ControllerBase
         new Post()
         {
             Id = "post_" + Guid.NewGuid().ToString().Replace("-", ""),
-            Author = new Author("timcookedit", "Tim", "Cookie"),
-            Content = "Thinking about releasing the iToaster next. It’ll sync with your iPhone and burn the Apple logo onto your bread. Because why not? \ud83c\udf5e\ud83c\udf4e",
+            Author = new Author("timcookedit", "Tim", "Cookie", AvatarUrl: "timcookedit.jpg"),
+            Content =
+                "Thinking about releasing the iToaster next. It’ll sync with your iPhone and burn the Apple logo onto your bread. Because why not? \ud83c\udf5e\ud83c\udf4e",
             Likes = 1756,
             Dislikes = 256,
             PostedAt = DateTime.Now.AddDays(-5)
@@ -32,8 +34,9 @@ public class PostsController : ControllerBase
         new Post()
         {
             Id = "post_" + Guid.NewGuid().ToString().Replace("-", ""),
-            Author = new Author("elontweetsalot", "Elon", "Musketeer"),
-            Content = "Accidentally sent a Tesla into space. Guess that’s one way to avoid traffic. \ud83d\ude80 #MarsOrBust",
+            Author = new Author("elontweetsalot", "Elon", "Musketeer", AvatarUrl: "elontweetsalot.jpg"),
+            Content =
+                "Accidentally sent a Tesla into space. Guess that’s one way to avoid traffic. \ud83d\ude80 #MarsOrBust",
             Likes = 3200,
             Dislikes = 0,
             PostedAt = DateTime.Now.AddDays(-2)
@@ -41,8 +44,9 @@ public class PostsController : ControllerBase
         new Post()
         {
             Id = "post_" + Guid.NewGuid().ToString().Replace("-", ""),
-            Author = new Author("mynameisjeff", "Jeff", "Bezoar"),
-            Content = "Just ordered something on Amazon with next-day delivery. The catch? It’s an island. Can’t wait to see how they pull this off! \ud83c\udf34\ud83d\udce6",
+            Author = new Author("mynameisjeff", "Jeff", "Bezoar", AvatarUrl: "mynameisjeff.jpg"),
+            Content =
+                "Just ordered something on Amazon with next-day delivery. The catch? It’s an island. Can’t wait to see how they pull this off! \ud83c\udf34\ud83d\udce6",
             Likes = 1278,
             Dislikes = 457,
             PostedAt = DateTime.Now
@@ -79,7 +83,8 @@ public class PostsController : ControllerBase
         var author = new Author(
             createPostRequest.User.Uid,
             createPostRequest.User.FirstName,
-            createPostRequest.User.LastName);
+            createPostRequest.User.LastName,
+            createPostRequest.User.AvatarUrl);
 
         var newPost = new Post()
         {
