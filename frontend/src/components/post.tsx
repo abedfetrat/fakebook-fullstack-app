@@ -50,7 +50,7 @@ function Post({post, user, onGetPosts}: PostProps) {
             }
             <div>
               <p className="font-medium">{post.author.firstName} {post.author.lastName}</p>
-              <p className="text-sm text-neutral-500">{getDaysAgo(post.postedAt)}</p>
+              <p className="text-sm font-medium text-neutral-500">@{post.author.uid}</p>
             </div>
             {(post.author.uid == user.uid) &&
               <div className="dropdown ml-auto">
@@ -74,6 +74,9 @@ function Post({post, user, onGetPosts}: PostProps) {
             </div>
             <div className="flex gap-2 font-medium">
               <Comment/> <span className="text-neutral-700 font-medium">{0}</span>
+            </div>
+            <div className="ml-auto">
+              <p className="text-sm text-neutral-500">{getDaysAgo(post.postedAt)}</p>
             </div>
           </div>
         </div>
