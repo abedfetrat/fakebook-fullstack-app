@@ -16,11 +16,11 @@ function App() {
   const [posts, setPosts] = useState<Post[] | null>(null);
 
   useEffect(() => {
-    handleGetPosts();
+    handleGetPosts(true);
   }, []);
 
-  const handleGetPosts = () => {
-    getPosts().then(posts => {
+  const handleGetPosts = (isFirstLoad: boolean = false) => {
+    getPosts(isFirstLoad).then(posts => {
       if (posts && posts.length > 0) {
         setPosts(posts);
       }

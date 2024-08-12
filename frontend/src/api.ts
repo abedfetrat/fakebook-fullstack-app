@@ -1,6 +1,6 @@
 import {Post, PostsListResponse, User} from "./types.ts";
 
-export async function getPosts() {
+export async function getPosts(isFirstLoad: boolean = false) {
   const response = await fetch("/api/posts");
   if (!response.ok) {
     console.error("Could not fetch posts:");
@@ -9,9 +9,12 @@ export async function getPosts() {
   }
   const postsListResponse = (await response.json()) as PostsListResponse;
   // Delaying return inorder to mimic actual network call
-  return new Promise<Post[]>(resolve => {
-    setTimeout(() => resolve(postsListResponse.posts), 1000);
-  });
+  if (isFirstLoad) {
+    return new Promise<Post[]>(resolve => {
+      setTimeout(() => resolve(postsListResponse.posts), 1000);
+    });
+  }
+  return postsListResponse.posts;
 }
 
 export async function createPost(content: string, user: User) {
