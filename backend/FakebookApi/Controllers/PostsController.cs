@@ -18,7 +18,7 @@ public class PostsController : ControllerBase
             Content = "Just had a virtual meeting in the Metaverse. My avatar has better dance moves than I do. #Upgrade",
             Likes = 0,
             Dislikes = 999999999,
-            PostedAt = DateTime.Now
+            PostedAt = DateTime.Now.AddDays(-10)
         },
         new Post()
         {
@@ -27,7 +27,7 @@ public class PostsController : ControllerBase
             Content = "Thinking about releasing the iToaster next. It’ll sync with your iPhone and burn the Apple logo onto your bread. Because why not? \ud83c\udf5e\ud83c\udf4e",
             Likes = 1756,
             Dislikes = 256,
-            PostedAt = DateTime.Now
+            PostedAt = DateTime.Now.AddDays(-5)
         },
         new Post()
         {
@@ -36,7 +36,7 @@ public class PostsController : ControllerBase
             Content = "Accidentally sent a Tesla into space. Guess that’s one way to avoid traffic. \ud83d\ude80 #MarsOrBust",
             Likes = 3200,
             Dislikes = 0,
-            PostedAt = DateTime.Now
+            PostedAt = DateTime.Now.AddDays(-2)
         },
         new Post()
         {
