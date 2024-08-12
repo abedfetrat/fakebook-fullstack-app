@@ -1,8 +1,8 @@
 import {Post as PostType, User} from "../types.ts";
 import {getDaysAgo, getInitials} from "../utils.ts";
 import Avatar from "./avatar.tsx";
-import {deletePost, updatePost} from "../api.ts";
-import {useState} from "react";
+import {deletePost} from "../api.ts";
+import EditPostModal from "./edit-post-modal.tsx";
 
 type PostProps = {
   post: PostType,
@@ -11,69 +11,32 @@ type PostProps = {
 }
 
 function Post({post, user, onGetPosts}: PostProps) {
-  const [postContent, setPostContent] = useState(post.content);
-
-  const handleShowEditModal = () => {
-    if (document) {
-      (document.getElementById("edit-post-modal") as HTMLFormElement).showModal();
-    }
-  }
-
-  const handleDelete = async () => {
-    const deleted = await deletePost(post.id);
-    if (deleted) {
-      onGetPosts();
-    }
-  };
-
-  const handleSave = async () => {
-    const saved = await updatePost(post.id, postContent);
-    if (saved) {
-      onGetPosts();
-    }
-  };
-
-  const handleDiscard = () => {
-    setPostContent(post.content);
-  }
+  const isPostByUser = post.author.uid == user.uid;
 
   return (
     <>
       <div className="card bg-base-100 w-100 shadow-lg">
         <div className="card-body">
           <div className="flex gap-4 mb-4 items-start">
-            {post.author.avatarUrl
-              ?
-              <img src={`/avatars/${post.author.avatarUrl}`} alt="" className="w-14 rounded-full"/>
-              :
-              <Avatar initials={getInitials(post.author.firstName, post.author.lastName)}/>
-            }
+            <Avatar
+              avatarUrl={post.author.avatarUrl}
+              initials={getInitials(post.author.firstName, post.author.lastName)}/>
             <div>
               <p className="font-medium">{post.author.firstName} {post.author.lastName}</p>
               <p className="text-sm font-medium text-neutral-500">@{post.author.uid}</p>
             </div>
-            {(post.author.uid == user.uid) &&
-              <div className="dropdown ml-auto">
-                <div tabIndex={0} role="button" className="btn btn-ghost m-1"><Kebab/></div>
-                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                  <li>
-                    <button onClick={handleShowEditModal}>Edit</button>
-                    <button className="text-error" onClick={handleDelete}>Delete
-                    </button>
-                  </li>
-                </ul>
-              </div>}
+            {isPostByUser && <ActionMenu postId={post.id} onGetPosts={onGetPosts}/>}
           </div>
           <p className="text-neutral-600">{post.content}</p>
           <div className="card-actions mt-4 gap-8 text-neutral-500">
             <div className="flex gap-2">
-              <ThumbsUp/> <span className="text-neutral-700 font-medium">{post.likes}</span>
+              <ThumbsUpIcon/> <span className="text-neutral-700 font-medium">{post.likes}</span>
             </div>
             <div className="flex gap-2 font-medium">
-              <ThumbsDown/> <span className="text-neutral-700 font-medium">{post.dislikes}</span>
+              <ThumbsDownIcon/> <span className="text-neutral-700 font-medium">{post.dislikes}</span>
             </div>
             <div className="flex gap-2 font-medium">
-              <Comment/> <span className="text-neutral-700 font-medium">{0}</span>
+              <CommentIcon/> <span className="text-neutral-700 font-medium">{0}</span>
             </div>
             <div className="ml-auto">
               <p className="text-sm text-neutral-500">{getDaysAgo(post.postedAt)}</p>
@@ -81,25 +44,44 @@ function Post({post, user, onGetPosts}: PostProps) {
           </div>
         </div>
       </div>
-      <dialog id="edit-post-modal" className="modal">
-        <div className="modal-box">
-            <textarea className="w-full" placeholder="Type something nice..."
-                      value={postContent}
-                      onChange={(e) => setPostContent(e.target.value)}/>
-          <div className="modal-action">
-            <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <button className="btn btn-primary text-white" onClick={handleSave}>Save</button>
-              <button className="btn ml-2" onClick={handleDiscard}>Discard</button>
-            </form>
-          </div>
-        </div>
-      </dialog>
+      <EditPostModal
+        postId={post.id}
+        originalPostContent={post.content}
+        onGetPosts={onGetPosts}
+      />
     </>
   );
 }
 
-function Kebab() {
+function ActionMenu({postId, onGetPosts}: { postId: string, onGetPosts: () => void }) {
+  const handleShowEditModal = () => {
+    if (document) {
+      (document.getElementById("edit-post-modal") as HTMLFormElement).showModal();
+    }
+  }
+
+  const handleDelete = async () => {
+    const deleted = await deletePost(postId);
+    if (deleted) {
+      onGetPosts();
+    }
+  };
+
+  return (
+    <div className="dropdown ml-auto">
+      <div tabIndex={0} role="button" className="btn btn-ghost m-1"><KebabIcon/></div>
+      <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+        <li>
+          <button onClick={handleShowEditModal}>Edit</button>
+          <button className="text-error" onClick={handleDelete}>Delete
+          </button>
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+function KebabIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
          className="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -109,7 +91,7 @@ function Kebab() {
   );
 }
 
-function ThumbsUp() {
+function ThumbsUpIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
          width="20"
@@ -122,7 +104,7 @@ function ThumbsUp() {
   );
 }
 
-function ThumbsDown() {
+function ThumbsDownIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
          width="20"
@@ -135,7 +117,7 @@ function ThumbsDown() {
   );
 }
 
-function Comment() {
+function CommentIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
          width="20"
