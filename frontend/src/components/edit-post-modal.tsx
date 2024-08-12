@@ -24,15 +24,16 @@ function EditPostModal({postId, originalPostContent, onGetPosts}: EditPostModalP
   return (
     <dialog id="edit-post-modal" className="modal">
       <div className="modal-box">
-            <textarea
-              className="w-full"
-              placeholder="Type something nice..."
-              value={editedPostContent}
-              onChange={(e) => setEditedPostContent(e.target.value)}/>
+        <h2 className="font-bold text-xl mb-4">Edit Post</h2>
+          <textarea
+            className="w-full"
+            placeholder="Type something nice..."
+            value={editedPostContent}
+            onChange={(e) => setEditedPostContent(e.target.value)}/>
         <div className="modal-action">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
-            <button className="btn btn-primary text-white" onClick={handleSave}>Save</button>
+            <button className="btn btn-primary text-white" onClick={handleSave}>Save Changes</button>
             <button className="btn ml-2" onClick={handleDiscard}>Discard</button>
           </form>
         </div>
