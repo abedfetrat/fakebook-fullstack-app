@@ -11,13 +11,16 @@ type NewPostProps = {
 
 function NewPost({user, onGetPosts}: NewPostProps) {
   const [postContent, setPostContent] = useState("");
+  const [posting, setIsPosting] = useState(false);
 
   const handlePost = async () => {
+    setIsPosting(true);
     const created = await createPost(postContent, user);
     if (created) {
       onGetPosts();
     }
     setPostContent("");
+    setIsPosting(false);
   };
 
   return (
@@ -30,7 +33,19 @@ function NewPost({user, onGetPosts}: NewPostProps) {
                       value={postContent}
                       onChange={(e) => setPostContent(e.target.value)}/>
             <div className="card-actions mt-4">
-              <button className="btn btn-primary text-white" onClick={handlePost}><SendIcon/> Post</button>
+              <button
+                className="btn btn-primary text-white"
+                onClick={handlePost}
+                disabled={posting}>
+                {
+                  posting
+                    ?
+                    <span className="loading loading-spinner"></span>
+                    :
+                    <SendIcon/>
+                }
+                Post
+              </button>
             </div>
           </div>
         </div>
