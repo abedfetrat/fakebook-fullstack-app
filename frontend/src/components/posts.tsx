@@ -16,7 +16,9 @@ function Posts({posts, user, onGetPosts}: PostsProps) {
           {
             posts == null
               ?
-              Array(4).fill(<PostSkeleton/>)
+              Array(4)
+                .fill(0)
+                .map((_, i) => <PostSkeleton key={i}/>)
               :
               posts.map(post => (
                 <Post
