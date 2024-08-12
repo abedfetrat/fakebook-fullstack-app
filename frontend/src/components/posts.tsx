@@ -12,10 +12,12 @@ function Posts({posts, user, onGetPosts}: PostsProps) {
     <section className="mt-12">
       <h1 className="text-2xl text-neutral-500">Recent posts</h1>
       {
-        posts != null
-          ?
-          <div className="flex flex-col flex-wrap gap-6 mt-8">
-            {
+        <div className="flex flex-col flex-wrap gap-6 mt-8">
+          {
+            posts == null
+              ?
+              Array(4).fill(<PostSkeleton/>)
+              :
               posts.map(post => (
                 <Post
                   key={post.id}
@@ -23,13 +25,15 @@ function Posts({posts, user, onGetPosts}: PostsProps) {
                   user={user}
                   onGetPosts={onGetPosts}/>
               ))
-            }
-          </div>
-          :
-          "Loading posts..."
+          }
+        </div>
       }
     </section>
   );
+}
+
+function PostSkeleton() {
+  return (<div className="skeleton h-[216px] w-full"></div>);
 }
 
 export default Posts;
