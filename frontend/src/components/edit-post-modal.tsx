@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {updatePost} from "../api.ts";
+import usePosts from "../hooks/use-posts.ts";
 
 type EditPostModalProps = {
   postId: string,
@@ -8,6 +8,7 @@ type EditPostModalProps = {
 };
 
 function EditPostModal({postId, originalPostContent, onGetPosts}: EditPostModalProps) {
+  const {updatePost} = usePosts();
   const [editedPostContent, setEditedPostContent] = useState(originalPostContent);
 
   const handleSave = async () => {
@@ -25,11 +26,11 @@ function EditPostModal({postId, originalPostContent, onGetPosts}: EditPostModalP
     <dialog id="edit-post-modal" className="modal">
       <div className="modal-box">
         <h2 className="font-bold text-xl mb-4">Edit Post</h2>
-          <textarea
-            className="w-full"
-            placeholder="Type something nice..."
-            value={editedPostContent}
-            onChange={(e) => setEditedPostContent(e.target.value)}/>
+        <textarea
+          className="w-full"
+          placeholder="Type something nice..."
+          value={editedPostContent}
+          onChange={(e) => setEditedPostContent(e.target.value)}/>
         <div className="modal-action">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}

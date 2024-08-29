@@ -1,8 +1,8 @@
 import {Post as PostType, User} from "../types.ts";
 import {getDaysAgo, getInitials} from "../utils.ts";
 import Avatar from "./avatar.tsx";
-import {deletePost} from "../api.ts";
 import EditPostModal from "./edit-post-modal.tsx";
+import usePosts from "../hooks/use-posts.ts";
 
 type PostProps = {
   post: PostType,
@@ -54,6 +54,7 @@ function Post({post, user, onGetPosts}: PostProps) {
 }
 
 function ActionMenu({postId, onGetPosts}: { postId: string, onGetPosts: () => void }) {
+  const {deletePost} = usePosts();
   const handleShowEditModal = () => {
     if (document) {
       (document.getElementById("edit-post-modal") as HTMLFormElement).showModal();

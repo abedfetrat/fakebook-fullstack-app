@@ -2,7 +2,7 @@ import {User} from "../types.ts";
 import {getInitials} from "../utils.ts";
 import {useState} from "react";
 import Avatar from "./avatar.tsx";
-import {createPost} from "../api.ts";
+import usePosts from "../hooks/use-posts.ts";
 
 type NewPostProps = {
   user: User,
@@ -10,6 +10,7 @@ type NewPostProps = {
 }
 
 function NewPost({user, onGetPosts}: NewPostProps) {
+  const {createPost} = usePosts();
   const [postContent, setPostContent] = useState("");
   const [posting, setIsPosting] = useState(false);
 
