@@ -1,16 +1,10 @@
 import NewPost from "../components/new-post.tsx";
 import Posts from "../components/posts.tsx";
-import {Post, User} from "../types.ts";
+import {Post} from "../types.ts";
 import {useEffect, useState} from "react";
 import usePosts from "../hooks/use-posts.ts";
 
 function Home() {
-  const user: User = {
-    uid: "johndoe",
-    firstName: "John",
-    lastName: "Doe",
-    email: "johndoe@mail.com"
-  };
   const {getPosts} = usePosts();
   const [posts, setPosts] = useState<Post[] | null>(null);
 
@@ -28,10 +22,9 @@ function Home() {
 
   return (
     <>
-      <NewPost user={user} onGetPosts={handleGetPosts}/>
+      <NewPost onGetPosts={handleGetPosts}/>
       <Posts
         posts={posts}
-        user={user}
         onGetPosts={handleGetPosts}/>
     </>
   );

@@ -1,4 +1,4 @@
-import {Post as PostType, User} from "../types.ts";
+import {Post as PostType} from "../types.ts";
 import {getDaysAgo, getInitials} from "../utils.ts";
 import Avatar from "./avatar.tsx";
 import EditPostModal from "./edit-post-modal.tsx";
@@ -7,7 +7,6 @@ import {useUser} from "@clerk/clerk-react";
 
 type PostProps = {
   post: PostType,
-  user: User,
   onGetPosts: () => void,
 }
 

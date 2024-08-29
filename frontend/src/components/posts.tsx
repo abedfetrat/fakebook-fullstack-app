@@ -1,13 +1,12 @@
-import {Post as PostType, User} from "../types.ts";
+import {Post as PostType} from "../types.ts";
 import Post from "./post.tsx";
 
 type PostsProps = {
   posts: PostType[] | null,
-  user: User,
   onGetPosts: () => void;
 }
 
-function Posts({posts, user, onGetPosts}: PostsProps) {
+function Posts({posts, onGetPosts}: PostsProps) {
   return (
     <section className="mt-12">
       <h1 className="text-2xl text-neutral-500">Recent posts</h1>
@@ -24,7 +23,6 @@ function Posts({posts, user, onGetPosts}: PostsProps) {
                 <Post
                   key={post.id}
                   post={post}
-                  user={user}
                   onGetPosts={onGetPosts}/>
               ))
           }

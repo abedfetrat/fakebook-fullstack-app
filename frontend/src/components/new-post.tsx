@@ -1,4 +1,3 @@
-import {User} from "../types.ts";
 import {getInitials} from "../utils.ts";
 import {useState} from "react";
 import Avatar from "./avatar.tsx";
@@ -6,7 +5,6 @@ import usePosts from "../hooks/use-posts.ts";
 import {useUser} from "@clerk/clerk-react";
 
 type NewPostProps = {
-  user: User,
   onGetPosts: () => void
 }
 
