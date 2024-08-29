@@ -1,4 +1,4 @@
-import {Post, PostsListResponse, User} from "../types.ts";
+import {Post, PostsListResponse} from "../types.ts";
 import useAuthenticatedFetch from "./use-auth-fetch.ts";
 
 function usePosts() {
@@ -20,11 +20,8 @@ function usePosts() {
     return postsListResponse.posts;
   }
 
-  const createPost = async (content: string, user: User) => {
-    const createPostRequest = {
-      content,
-      user
-    };
+  const createPost = async (content: string) => {
+    const createPostRequest = { content };
     const response = await authenticatedFetch("/api/posts", {
       method: "POST",
       headers: {

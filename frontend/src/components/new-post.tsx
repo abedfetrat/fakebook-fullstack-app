@@ -3,32 +3,38 @@ import {getInitials} from "../utils.ts";
 import {useState} from "react";
 import Avatar from "./avatar.tsx";
 import usePosts from "../hooks/use-posts.ts";
+import {useUser} from "@clerk/clerk-react";
 
 type NewPostProps = {
   user: User,
   onGetPosts: () => void
 }
 
-function NewPost({user, onGetPosts}: NewPostProps) {
+function NewPost({onGetPosts}: NewPostProps) {
+  const { user, isLoaded } = useUser()
   const {createPost} = usePosts();
   const [postContent, setPostContent] = useState("");
   const [posting, setIsPosting] = useState(false);
 
   const handlePost = async () => {
     setIsPosting(true);
-    const created = await createPost(postContent, user);
+    const created = await createPost(postContent);
     if (created) {
       onGetPosts();
     }
     setPostContent("");
     setIsPosting(false);
   };
+  
+  if (!isLoaded) {
+    return;
+  }
 
   return (
     <div className="card bg-base-100 w-100 shadow-lg">
       <div className="card-body">
         <div className="flex gap-4 items-start">
-          <Avatar initials={getInitials(user.firstName, user.lastName)}/>
+          <Avatar avatarUrl={user!.imageUrl} initials={getInitials(user!.firstName ?? "", user!.lastName ?? "")}/>
           <div className="w-full">
             <textarea className="w-full" placeholder="Type something nice..."
                       value={postContent}

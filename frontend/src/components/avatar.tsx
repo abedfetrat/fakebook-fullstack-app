@@ -2,7 +2,7 @@ function Avatar({avatarUrl, initials}: { avatarUrl?: string, initials: string })
   if (avatarUrl) {
     return (
       <img
-        src={`/avatars/${avatarUrl}`}
+        src={`${avatarUrl}`}
         width={56}
         height={56}
         alt=""
