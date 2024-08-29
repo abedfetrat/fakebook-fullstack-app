@@ -30,7 +30,7 @@ function App() {
   return (
     <>
       <header>
-        <Navbar user={user}/>
+        <Navbar/>
       </header>
       <main className="container max-w-screen-lg mx-auto py-8 px-4 md:py-12">
         <NewPost user={user} onGetPosts={handleGetPosts}/>

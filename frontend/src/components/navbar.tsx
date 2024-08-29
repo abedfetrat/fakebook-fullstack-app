@@ -1,8 +1,6 @@
-import {User} from "../types.ts";
-import {getInitials} from "../utils.ts";
-import Avatar from "./avatar.tsx";
+import {SignedIn, UserButton} from "@clerk/clerk-react";
 
-function Navbar({user}: { user: User }) {
+function Navbar() {
   return (
     <div className="navbar bg-base-100 shadow-lg">
       <div className="navbar-start"></div>
@@ -10,7 +8,13 @@ function Navbar({user}: { user: User }) {
         <a className="btn btn-ghost text-2xl text-primary">Fakebook</a>
       </div>
       <div className="navbar-end">
-        <Avatar initials={getInitials(user.firstName, user.lastName)}/>
+        <SignedIn>
+          <UserButton appearance={{
+            elements: {
+              avatarBox: "w-10 h-10"
+            },
+          }}/>
+        </SignedIn>
       </div>
     </div>
   );
