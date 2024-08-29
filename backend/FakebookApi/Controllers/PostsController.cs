@@ -1,8 +1,11 @@
+using System.Security.Claims;
 using FakebookApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FakebookApi.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class PostsController : ControllerBase
@@ -79,12 +82,16 @@ public class PostsController : ControllerBase
     [HttpPost]
     public ActionResult CreatePost(CreatePostRequest createPostRequest)
     {
-        // TOOD: validate request
+        var username = User.FindFirst(c => c.Type == "username")?.Value;
+        var firstName = User.FindFirst(c => c.Type == "firstName")?.Value;
+        var lastName = User.FindFirst(c => c.Type == "lastName")?.Value;
+        var avatarUrl = User.FindFirst(c => c.Type == "avatarUrl")?.Value;
+
         var author = new Author(
-            createPostRequest.User.Uid,
-            createPostRequest.User.FirstName,
-            createPostRequest.User.LastName,
-            createPostRequest.User.AvatarUrl);
+            username ?? "",
+            firstName ?? "",
+            lastName ?? "",
+            avatarUrl);
 
         var newPost = new Post()
         {

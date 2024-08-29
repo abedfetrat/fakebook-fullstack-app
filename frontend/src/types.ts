@@ -1,11 +1,3 @@
-export interface User {
-  uid: string,
-  firstName: string,
-  lastName: string,
-  email: string,
-  avatarUrl?: string
-}
-
 export interface Author {
   uid: string,
   firstName: string,
