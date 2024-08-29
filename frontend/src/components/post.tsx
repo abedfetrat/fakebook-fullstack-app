@@ -3,6 +3,7 @@ import {getDaysAgo, getInitials} from "../utils.ts";
 import Avatar from "./avatar.tsx";
 import EditPostModal from "./edit-post-modal.tsx";
 import usePosts from "../hooks/use-posts.ts";
+import {useUser} from "@clerk/clerk-react";
 
 type PostProps = {
   post: PostType,
@@ -10,8 +11,14 @@ type PostProps = {
   onGetPosts: () => void,
 }
 
-function Post({post, user, onGetPosts}: PostProps) {
-  const isPostByUser = post.author.uid == user.uid;
+function Post({post, onGetPosts}: PostProps) {
+  const { user, isLoaded } = useUser();
+  
+  if (!isLoaded) {
+    return;
+  }
+  
+  const isPostByUser = user && post.author.uid == user.username;
 
   return (
     <>
