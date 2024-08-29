@@ -82,7 +82,6 @@ public class PostsController : ControllerBase
     [HttpPost]
     public ActionResult CreatePost(CreatePostRequest createPostRequest)
     {
-        //var uid = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         var username = User.FindFirst(c => c.Type == "username")?.Value;
         var firstName = User.FindFirst(c => c.Type == "firstName")?.Value;
         var lastName = User.FindFirst(c => c.Type == "lastName")?.Value;
