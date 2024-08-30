@@ -2,7 +2,7 @@ import {SignInButton, useSignIn} from "@clerk/clerk-react";
 import {useState} from "react";
 
 const guestEmail = "johndoe@mail.com";
-const guestPassword = "JohnDoe1337";
+const guestPassword = "JohnDoe123";
 
 function SignIn() {
   const {isLoaded, signIn, setActive} = useSignIn()
