@@ -75,6 +75,7 @@ public class PostsController : ControllerBase
         }
 
         foundPost.Content = updatePostRequest.Content;
+        await _context.SaveChangesAsync();
 
         return foundPost;
     }
